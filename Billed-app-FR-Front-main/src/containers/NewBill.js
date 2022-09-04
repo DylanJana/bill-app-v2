@@ -1,6 +1,24 @@
 import { ROUTES_PATH } from '../constants/routes.js'
 import Logout from "./Logout.js"
 
+function getExtension(fileName) {
+  return fileName.split(".").pop();
+}
+
+function checkPicIsAvailable(extensionOfFile) {
+  let btnSubmit = document.querySelector('#btn-send-bill');
+  let errorMessage = document.querySelector('.error-message');
+  if(extensionOfFile === 'png' || extensionOfFile === 'jpg' || extensionOfFile === 'jpeg') {
+    btnSubmit.removeAttribute('disabled');
+    errorMessage.removeAttribute('style');
+    return true; 
+  } else {
+    errorMessage.style.display = "block";
+    btnSubmit.setAttribute('disabled', 'true');
+    return false;  
+  }
+}
+
 export default class NewBill {
   constructor({ document, onNavigate, store, localStorage }) {
     this.document = document
@@ -20,6 +38,7 @@ export default class NewBill {
     const file = this.document.querySelector(`input[data-testid="file"]`).files[0]
     const filePath = e.target.value.split(/\\/g)
     const fileName = filePath[filePath.length-1]
+    console.log("FILENAME ", fileName);
     const formData = new FormData()
     const email = JSON.parse(localStorage.getItem("user")).email
     formData.append('file', file)
@@ -37,7 +56,11 @@ export default class NewBill {
         console.log(fileUrl)
         this.billId = key
         this.fileUrl = fileUrl
-        this.fileName = fileName
+        let extensionOfFile = getExtension(fileName);
+        let checkPicIsAvailabe = checkPicIsAvailable(extensionOfFile);
+        if(checkPicIsAvailabe === true) {
+          this.fileName = fileName;
+        }
       }).catch(error => console.error(error))
   }
   handleSubmit = e => {
