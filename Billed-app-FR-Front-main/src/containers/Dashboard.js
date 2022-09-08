@@ -151,7 +151,7 @@ export default class {
         /******** [BUG HUNT] 
          * 1. I select the container's bills
          * 2. I select only bills of this containe
-         * 3. Result -> The function was called  only once time on by bill ********/
+         * 3. Result -> The function was called  only once time by bill ********/
         bills.forEach(bill => {
           $(`#status-bills-container${this.index} #open-bill${bill.id}`).click((e) => this.handleEditTicket(e, bill, bills))
         })
