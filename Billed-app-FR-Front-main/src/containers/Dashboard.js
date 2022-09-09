@@ -139,6 +139,11 @@ export default class {
       if (this.index === undefined || this.index !== index) this.index = index
       let arrowObjectIcon = $(`#arrow-icon${this.index}`);
       let arrowIcon = arrowObjectIcon[0];
+      /****** Fixed an other beug, my tab open only once in twice
+       * 1. My arrow contains the class opened ?
+       * 2. Not contains -> My tab is not open -> Open my tab and add this class
+       * 3. Contains -> My tab is open -> Close my tab and remove this class
+       */
       if (this.counter % 2 === 0 && !arrowIcon.classList.contains('opened')) {
         $(`#arrow-icon${this.index}`).css({ transform: 'rotate(0deg)'})
         arrowIcon.classList.add('opened')
