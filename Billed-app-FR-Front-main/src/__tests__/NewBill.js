@@ -54,7 +54,7 @@ describe("Given I am connected as an employee", () => {
     })
   })
 
-  /*describe('When I select a file', () => {
+  describe('When I select a file', () => {
     test('It should call handleChangeFile method', async() => {
       const handleChangeFile = jest.fn(newBill.handleChangeFile);
       const inputFile = screen.getByTestId("file");
@@ -66,5 +66,5 @@ describe("Given I am connected as an employee", () => {
       });
       expect(handleChangeFile).toHaveBeenCalled();
     })
-  })*/
+  })
 })
