@@ -33,6 +33,7 @@ describe("Given I am connected as an employee", () => {
       expect(windowIcon.classList.contains('active-icon')).toBe(true)
 
     })
+
     test("Then bills should be ordered from earliest to latest", () => {
       // Tri par date : de la plus récente à la plus lointaine
       const sortBills = bills.sort((a, b) => (a.date < b.date ? 1: -1));
@@ -98,24 +99,22 @@ describe("Given I am a user connected as User", () => {
         }})
       window.onNavigate(ROUTES_PATH.Bills)
       await new Promise(process.nextTick);
-      const message = await screen.getByText(/Erreur/)
+      const message = await screen.getByText("Erreur")
       expect(message).toBeTruthy()
     })
-
-    /*test("fetches messages from an API and fails with 500 message error", async () => {
+    test("fetches bills from an API and fails with 500 message error", async () => {
 
       mockStore.bills.mockImplementationOnce(() => {
         return {
           list : () =>  {
-            return Promise.reject(new Error("Erreur 500"))
+            return Promise.reject(new Error("Erreur"))
           }
         }})
-
       window.onNavigate(ROUTES_PATH.Bills)
       await new Promise(process.nextTick);
-      const message = await screen.getByText(/Erreur 500/)
+      const message = await screen.getByText("Erreur")
       expect(message).toBeTruthy()
-    })*/
+    })
   })
 
   })
